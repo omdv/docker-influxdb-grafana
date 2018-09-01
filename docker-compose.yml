@@ -21,15 +21,14 @@ telegraf:
     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
 grafana:
-  image: grafana/grafana:latest
+  image: fg2it/grafana-armhf:v5.1.4
   container_name: grafana
   ports:
-    - "3000:3000"
+    - "80:3000"
   env_file:
     - 'env.grafana'
   links:
     - influxdb
   volumes:
-    # Data persistency
-    # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
-    - /srv/docker/grafana/data:/var/lib/grafana
+    - grafana-storage:/var/lib/grafana
+    - ./grafana.ini:/etc/grafana/grafana.ini:ro
