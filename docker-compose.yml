@@ -24,7 +24,7 @@ grafana:
   image: fg2it/grafana-armhf:v5.1.4
   container_name: grafana
   ports:
-    - "80:3000"
+    - "8080:3000"
   env_file:
     - 'env.grafana'
   links:
@@ -32,3 +32,14 @@ grafana:
   volumes:
     - grafana-storage:/var/lib/grafana
     - ./grafana.ini:/etc/grafana/grafana.ini:ro
+
+# kapacitor:
+#  image: kapacitor:latest
+#  container_name: kapacitor
+#  ports:
+#    - "9092:9092"
+#  volumes:
+#    - kapacitor:/var/lib/kapacitor
+#    - ./kapacitor.conf:/etc/kapacitor/kapacitor.conf:ro
+#  links:
+#    - influxdb
